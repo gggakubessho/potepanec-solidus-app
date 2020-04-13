@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- HEAD -->
-  <%= render 'layouts/head' %>
-  <body>
-    <div class="main-wrapper">
-        <!-- HEADER -->
-        <%= render 'layouts/header' %>
-        <%= yield %>
-    </div>
-    <!-- FOOTER -->
-    <%= render 'layouts/footer' %>
-    <!-- LOGIN MODAL -->
-    <%= render 'layouts/login_modal' %>
-    <!-- SIGN UP MODAL -->
-    <%= render 'layouts/sign_up_modal' %>  
-  </body>
+
+<!-- HEAD -->
+<%= render 'layouts/head' %>
+
+<body>
+  <div class="main-wrapper">
+    <!-- HEADER -->
+    <%= render 'layouts/header' %>
+    <%= yield %>
+  </div>
+  <!-- FOOTER -->
+  <%= render 'layouts/footer' %>
+  <!-- LOGIN MODAL -->
+  <%= render 'layouts/login_modal' %>
+  <!-- SIGN UP MODAL -->
+  <%= render 'layouts/sign_up_modal' %>
+  <!-- CUSTOM JS -->
+  <%= javascript_include_tag 'application' %>
+</body>
+
 </html>
