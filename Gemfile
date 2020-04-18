@@ -49,6 +49,7 @@ group :development, :test do
   gem 'rails-erd'
   gem 'annotate'
   gem 'spring-commands-rspec'
+  gem 'rails-controller-testing'
 end
 
 group :development do
