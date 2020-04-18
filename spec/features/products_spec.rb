@@ -7,17 +7,20 @@ RSpec.feature "Products", type: :feature do
            description: "test",
            price: "23.45")
   end
+
   background do
     visit potepan_product_path(product.id)
   end
+
   feature "製品詳細ページ" do
-    scenario "header" do
+    scenario "headerにトップページへのリンクが存在すること" do
       within find('.header') do
         # トッページへのリンクが正しいこと
         expect(page).to have_current_path potepan_product_path(product.id)
       end
     end
-    scenario "light section" do
+
+    scenario "light sectionに商品名の表示とトップページへのリンクが存在すること" do
       within find('.lightSection') do
         # 商品名が表示されていること
         # トップページへのリンクが正しいこと
@@ -25,11 +28,9 @@ RSpec.feature "Products", type: :feature do
         expect(page).to have_current_path potepan_product_path(product.id)
       end
     end
-    scenario "maincontent section" do
+
+    scenario "maincontent sectionに対象商品のデータが表示されること" do
       within find('.mainContent') do
-        # 商品名が表示されていること
-        # 商品説明が表示されていること
-        # 商品金額が表示されていること
         expect(page).to have_content product.name
         expect(page).to have_content product.description
         expect(page).to have_content product.display_price
