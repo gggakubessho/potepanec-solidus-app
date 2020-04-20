@@ -13,23 +13,32 @@ RSpec.feature "Products", type: :feature do
   end
 
   feature "製品詳細ページ" do
-    scenario "headerにトップページへのリンクが存在すること" do
-      within find('.header') do
-        # トッページへのリンクが正しいこと
-        expect(page).to have_current_path potepan_product_path(product.id)
+
+    scenario ".header内のリンクがトップページに遷移すること" do
+      within find('.navbar-header') do
+        click_on "HOME"
+        expect(current_path).to eq potepan_path
+      end
+      within find('.navbar-collapse') do
+        click_on "HOME"
+        expect(current_path).to eq potepan_path
       end
     end
 
-    scenario "light sectionに商品名の表示とトップページへのリンクが存在すること" do
+    scenario ".lightSectionにてリンクがトップページに遷移すること" do
       within find('.lightSection') do
-        # 商品名が表示されていること
-        # トップページへのリンクが正しいこと
-        expect(page).to have_content product.name
-        expect(page).to have_current_path potepan_product_path(product.id)
+        click_on "HOME"
+        expect(current_path).to eq potepan_path
       end
     end
 
-    scenario "maincontent sectionに対象商品のデータが表示されること" do
+    scenario ".lightSection内で商品名が表示されること" do
+      within find('.lightSection') do
+        expect(page).to have_content product.name
+      end
+    end
+
+    scenario ".mainContent内にに対象商品のデータが表示されること" do
       within find('.mainContent') do
         expect(page).to have_content product.name
         expect(page).to have_content product.description
