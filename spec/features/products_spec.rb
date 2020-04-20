@@ -13,7 +13,6 @@ RSpec.feature "Products", type: :feature do
   end
 
   feature "製品詳細ページ" do
-
     scenario ".header内のリンクがトップページに遷移すること" do
       within find('.navbar-header') do
         click_on "HOME"
