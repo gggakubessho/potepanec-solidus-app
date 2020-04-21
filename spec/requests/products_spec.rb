@@ -18,12 +18,16 @@ RSpec.describe "Products", type: :request do
       expect(response).to have_http_status(200)
     end
 
-    it "showテンプレートを返すこと" do
-      expect(response).to render_template :show
+    it "商品名が表示されること" do
+      expect(response.body).to include "SmapleProduct"
     end
 
-    it '@productがアサインされること' do
-      expect(assigns(:product)).to eq product
+    it '商品説明が表示されること' do
+      expect(response.body).to include "test"
+    end
+
+    it '商品金額が表示されること' do
+      expect(response.body).to include "23.45"
     end
   end
 end
