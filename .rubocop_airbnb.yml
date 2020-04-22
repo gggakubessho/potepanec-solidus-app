@@ -1,0 +1,12 @@
+require:
+  - rubocop-airbnb
+
+AllCops:
+  # 除外
+  Exclude:
+    - vendor/bundle/**/*
+    - 'bin/**'
+    - 'lib/**'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
