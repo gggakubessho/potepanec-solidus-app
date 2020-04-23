@@ -12,7 +12,7 @@ RSpec.feature "Products", type: :feature do
     visit potepan_product_path(product.id)
   end
 
-  feature "製品詳細ページ" do
+  feature "商品詳細ページ" do
     scenario ".header内のリンクがトップページに遷移すること" do
       within find('.navbar-header') do
         click_on "HOME"
@@ -32,8 +32,14 @@ RSpec.feature "Products", type: :feature do
     end
 
     scenario ".lightSection内で商品名が表示されること" do
-      within find('.lightSection') do
-        expect(page).to have_content product.name
+      within find(".pageHeader") do
+        within find(".page-title") do
+          expect(page).to have_content product.name
+        end
+
+        within find(".breadcrumb") do
+          expect(page).to have_content product.name
+        end
       end
     end
 

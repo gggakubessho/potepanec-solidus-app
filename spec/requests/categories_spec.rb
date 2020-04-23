@@ -25,21 +25,21 @@ RSpec.describe "Categories", type: :request do
     end
 
     context "指定カテゴリの商品" do
-      it "指定カテゴリの商品名が表示されること" do
+      it "指定カテゴリの商品名が含まれていること" do
         expect(response.body).to include "Rails Mug"
       end
 
-      it "指定カテゴリの商品金額が表示されること" do
+      it "指定カテゴリの商品金額が含まれていること" do
         expect(response.body).to include "19.99"
       end
     end
 
     context "指定カテゴリ以外の商品" do
-      it "指定カテゴリ以外の商品名が表示されないこと" do
+      it "指定カテゴリ以外の商品名が含まれていないこと" do
         expect(response.body).not_to include "Rails Bag"
       end
 
-      it "指定カテゴリ以外の商品金額が表示されないこと" do
+      it "指定カテゴリ以外の商品金額が含まれていないこと" do
         expect(response.body).not_to include "22.99"
       end
     end
