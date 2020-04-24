@@ -49,9 +49,9 @@ RSpec.feature "Categories", type: :feature do
     end
 
     scenario "商品をクリックすると商品詳細ページに遷移すること" do
-      #サイドメニューでカテゴリ選択
+      # サイドメニューでカテゴリ選択
       click_on mugs_taxon.name
-      #商品クリック
+      # 商品クリック
       click_on rails_mug.name
       expect(current_path).to eq potepan_product_path(rails_mug.id)
     end
