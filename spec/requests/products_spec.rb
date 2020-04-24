@@ -2,12 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Products", type: :request do
   describe "GET #show" do
-    let!(:product) do
-      create(:product,
-             name: "SmapleProduct",
-             description: "test",
-             price: "23.45")
-    end
+    include_context "category setup"
 
     before do
       get potepan_product_path(product.id)

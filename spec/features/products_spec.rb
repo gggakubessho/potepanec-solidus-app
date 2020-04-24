@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "Products", type: :feature do
-  given!(:product) do
-    create(:product, name: "SmapleProduct", description: "test", price: "23.45")
-  end
+  include_context "category setup"
 
   background do
     visit potepan_product_path(product.id)
@@ -22,6 +20,11 @@ RSpec.feature "Products", type: :feature do
           expect(page).to have_content product.name
         end
       end
+    end
+
+    scenario "一覧ページに遷移すること" do
+      click_on "一覧ページへ戻る"
+      expect(current_path).to eq potepan_category_path(product.taxons.first.id)
     end
 
     scenario ".mainContent内にに対象商品のデータが表示されること" do
