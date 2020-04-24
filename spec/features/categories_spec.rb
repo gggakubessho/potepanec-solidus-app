@@ -1,44 +1,16 @@
 require 'rails_helper'
 
 RSpec.feature "Categories", type: :feature do
-  let!(:taxonomy)    { create(:taxonomy, name: 'Categories') }
-  let!(:rails_taxon) { create(:taxon, name: 'Ruby on Rails', parent_id: taxonomy.root.id) }
-  let!(:bags_taxon)  { create(:taxon, name: 'Bags', parent_id: taxonomy.root.id) }
-  let!(:mugs_taxon)  { create(:taxon, name: 'Mugs', parent_id: taxonomy.root.id) }
-  let!(:rails_bag)   do
-    create(:custom_product, name: 'Rails Bag', price: '22.99',
-                            taxons: [rails_taxon, bags_taxon])
-  end
-  let!(:rails_mug) do
-    create(:custom_product, name: 'Rails Mug', price: '19.99',
-                            taxons: [rails_taxon, mugs_taxon])
-  end
+  include_context "category setup"
 
   background do
     visit potepan_category_path(rails_taxon.id)
   end
 
   feature "商品カテゴリページ" do
-    scenario ".header内のリンクがトップページに遷移すること" do
-      within find('.navbar-header') do
-        click_on "HOME"
-        expect(current_path).to eq potepan_path
-      end
+    include_context "HOME link"
 
-      within find('.navbar-collapse') do
-        click_on "HOME"
-        expect(current_path).to eq potepan_path
-      end
-    end
-
-    scenario ".lightSectionにてリンクがトップページに遷移すること" do
-      within find('.pageHeader') do
-        click_on "HOME"
-        expect(current_path).to eq potepan_path
-      end
-    end
-
-    scenario ".lightSection内でカテゴリ名が表示されること" do
+    scenario ".pageHeader内にてカテゴリ名が表示されること" do
       within find(".pageHeader") do
         within find(".page-title") do
           expect(page).to have_content rails_taxon.name
@@ -77,7 +49,9 @@ RSpec.feature "Categories", type: :feature do
     end
 
     scenario "商品をクリックすると商品詳細ページに遷移すること" do
+      #サイドメニューでカテゴリ選択
       click_on mugs_taxon.name
+      #商品クリック
       click_on rails_mug.name
       expect(current_path).to eq potepan_product_path(rails_mug.id)
     end
