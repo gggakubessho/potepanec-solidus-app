@@ -95,8 +95,3 @@ workflows:
           requires:
             - rspec
             - rubocop
-          filters:
-            branches:
-              only:
-                - master
-                - development
