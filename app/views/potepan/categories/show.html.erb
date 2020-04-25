@@ -2,6 +2,13 @@
 <!-- パンくず -->
 <%= render 'light_section_pageheader', taxon_name: @taxon.name %>
 <!-- メインコンテンツ -->
-<%= render 'maincontent_section', products: @products %>
+<section class="mainContent clearfix productsContent">
+  <div class="container">
+    <div class="row">
+      <%= render 'sidebar' %>
+      <%= render 'products_list' %>
+    </div>
+  </div>
+</section>
 <!-- パートナーブランドロゴ -->
 <%= render 'light_section' %>
