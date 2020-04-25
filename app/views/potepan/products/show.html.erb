@@ -1,5 +1,5 @@
 <% provide(:title, 'Single Product') %>
-<!-- LIGHT SECTION -->
-<%= render 'light_section', product: @product  %>
-<!-- MAIN CONTENT SECTION -->
+<!-- パンくず -->
+<%= render 'light_section', product_name: @product.name  %>
+<!-- メインコンテンツ -->
 <%= render 'maincontent_section', product: @product  %>

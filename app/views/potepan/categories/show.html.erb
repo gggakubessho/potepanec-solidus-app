@@ -1,7 +1,7 @@
 <% provide(:title, @taxon.name) %>
-<!-- LIGHT SECTION -->
-<%= render 'light_section_pageheader', taxon: @taxon %>
-<!-- MAIN CONTENT SECTION -->
+<!-- パンくず -->
+<%= render 'light_section_pageheader', taxon_name: @taxon.name %>
+<!-- メインコンテンツ -->
 <%= render 'maincontent_section', products: @products %>
-<!-- LIGHT SECTION -->
+<!-- パートナーブランドロゴ -->
 <%= render 'light_section' %>
