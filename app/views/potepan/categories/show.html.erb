@@ -1,0 +1,14 @@
+<% provide(:title, @taxon.name) %>
+
+<%= render 'pageheader', taxon_name: @taxon.name %>
+
+<section class="mainContent clearfix productsContent">
+  <div class="container">
+    <div class="row">
+      <%= render 'sidebar' %>
+      <%= render 'products_list' %>
+    </div>
+  </div>
+</section>
+
+<%= render 'partner_brand' %>
