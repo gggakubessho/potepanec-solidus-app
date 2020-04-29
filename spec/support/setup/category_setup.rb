@@ -16,4 +16,8 @@ RSpec.shared_context "category setup" do
   let!(:related_products) do
     create_list(:custom_product, 4, name: "Related Product", price: '99.99', taxons: [rails_taxon])
   end
+  let!(:non_taxon_product) do
+    create(:custom_product,
+           name: "Non Taxon Product", price: "33.33")
+  end
 end

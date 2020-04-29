@@ -8,7 +8,13 @@ RSpec.describe "Products", type: :request do
       get potepan_product_path(product.id)
     end
 
-    it "200 OK レスポンスを返すこと" do
+    it "taxonが存在する商品で200OK レスポンスを返すこと" do
+      expect(response).to be_successful
+      expect(response).to have_http_status(200)
+    end
+
+    it "taxonが存在しない商品で200OK レスポンスを返すこと" do
+      get potepan_product_path(non_taxon_product.id)
       expect(response).to be_successful
       expect(response).to have_http_status(200)
     end

@@ -31,11 +31,13 @@
       </div>
       <div class="media-body">
         <ul class="list-inline">
+          <% if product.taxons.present? %>
           <li>
             <%= link_to potepan_category_path(product.taxons.first.id) do %>
             <i class="fa fa-reply" aria-hidden="true"></i>一覧ページへ戻る
             <% end %>
           </li>
+          <% end %>
         </ul>
         <h2><%= product.name %></h2>
         <h3><%= product.display_price %></h3>
