@@ -39,21 +39,11 @@ RSpec.feature "Products", type: :feature do
       scenario "同カテゴリの関連商品が4つ表示されること" do
         within find('.productsContent') do
           # 同カテゴリの商品が表示される
-          expect(all('.productBox')[0]).to have_content related_products[0].name
-          expect(all('.productBox')[0]).to have_content related_products[0].price
-          expect(page).to have_link nil, href: potepan_product_path(related_products[0].id)
-
-          expect(all('.productBox')[1]).to have_content related_products[1].name
-          expect(all('.productBox')[1]).to have_content related_products[1].price
-          expect(page).to have_link nil, href: potepan_product_path(related_products[1].id)
-
-          expect(all('.productBox')[2]).to have_content related_products[2].name
-          expect(all('.productBox')[2]).to have_content related_products[2].price
-          expect(page).to have_link nil, href: potepan_product_path(related_products[2].id)
-
-          expect(all('.productBox')[3]).to have_content related_products[3].name
-          expect(all('.productBox')[3]).to have_content related_products[3].price
-          expect(page).to have_link nil, href: potepan_product_path(related_products[3].id)
+          related_products.each_with_index do |related_product, i|
+            expect(all('.productBox')[i]).to have_content related_products[i].name
+            expect(all('.productBox')[i]).to have_content related_products[i].price
+            expect(page).to have_link nil, href: potepan_product_path(related_products[i].id)
+          end
 
           # 異カテゴリの商品は表示されない
           expect(all('.productBox')[0]).not_to have_content product.name
