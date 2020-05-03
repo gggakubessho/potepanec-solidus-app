@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :potepan do
+    namespace :api do
+      get 'suggests/index'
+    end
+  end
   # This line mounts Solidus's routes at the root of your application.
   # This means, any requests to URLs such as /products, will go to Spree::ProductsController.
   # If you would like to change where this engine is mounted, simply change the :at option to something different.
@@ -27,6 +32,10 @@ Rails.application.routes.draw do
     
     resources :products,            only: [:show]
     resources :categories,          only: [:show]
+
+    namespace :api do
+      resources :suggests,          only: [:index]
+    end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
