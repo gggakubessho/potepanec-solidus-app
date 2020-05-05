@@ -37,7 +37,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'solidus', '~> 2.9.0'
 gem 'solidus_auth_devise'
 gem 'solidus_i18n', github: 'solidusio-contrib/solidus_i18n', branch: 'master'
-gem 'httpclient'
+gem 'faraday'
 gem 'dotenv-rails'
 
 group :development, :test do
