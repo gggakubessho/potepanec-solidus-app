@@ -8,9 +8,16 @@ RSpec.shared_context "category setup" do
            name: "SmapleProduct", description: "test", price: "23.45", taxons: [rails_taxon])
   end
   let!(:rails_bag) do
-    create(:custom_product, name: 'Rails Bag', price: '22.99', taxons: [rails_taxon, bags_taxon])
+    create(:custom_product, name: 'Rails Bag', price: '22.99', taxons: [bags_taxon])
   end
   let!(:rails_mug) do
-    create(:custom_product, name: 'Rails Mug', price: '19.99', taxons: [rails_taxon, mugs_taxon])
+    create(:custom_product, name: 'Rails Mug', price: '19.99', taxons: [mugs_taxon])
+  end
+  let!(:related_products) do
+    create_list(:custom_product, 4, name: "Related Product", price: '99.99', taxons: [rails_taxon])
+  end
+  let!(:non_taxon_product) do
+    create(:custom_product,
+           name: "Non Taxon Product", price: "33.33")
   end
 end
