@@ -1,9 +1,9 @@
 class Potepan::Api::SuggestsController < ApplicationController
   def index
-    params = {}
-    params[:keyword] = "r"
-    params[:max_num] = 5
-    con = Potepan::Request::SuggestsRequest.build(params)
+    api_params = {}
+    api_params[:keyword] = params[:keyword]
+    api_params[:max_num] = params[:max_num]
+    con = Potepan::Request::SuggestsRequest.build(api_params)
     res = Potepan::APIRequest.send(con)
     status = res.status
 
