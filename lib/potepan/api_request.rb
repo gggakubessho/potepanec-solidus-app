@@ -5,7 +5,7 @@ module Potepan
     end
 
     def self.build(params)
-      req_info = self.opts
+      req_info = opts
       url = ENV["POTEPAN_API_URI"] + req_info[:path]
       api_key = ENV["POTEPAN_API_KEY"]
       connection = Faraday.new(url) do |builder|
