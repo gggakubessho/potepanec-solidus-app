@@ -27,6 +27,8 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_HOST: mysql
       REDIS_URL: "redis://redis:6379"
+      POTEPAN_API_KEY: ${POTEPAN_API_KEY} 
+      POTEPAN_API_URI: ${POTEPAN_API_URI} 
     depends_on:
       - mysql
       - redis
