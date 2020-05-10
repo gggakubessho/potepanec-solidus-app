@@ -1,14 +1,14 @@
 class Potepan::Api::SuggestsController < ApplicationController
+  MAX_DISPLAY_COUNT = 4
   def index
     api_params = {}
     api_params[:keyword] = params[:keyword]
-    api_params[:max_num] = params[:max_num]
+    api_params[:max_num] = MAX_DISPLAY_COUNT
     con = Potepan::Request::SuggestsRequest.build(api_params)
     res = Potepan::APIRequest.send(con)
     status = res.status
-
     if status == 200
-      render status: status, json: { status: status, message: res.body }
+      render status: status, json: res.body
     else
       case status
       when 400

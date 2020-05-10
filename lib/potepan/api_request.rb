@@ -12,7 +12,6 @@ module Potepan
         builder.request :url_encoded
         builder.headers["Authorization"] = "Bearer #{api_key}"
         builder.response :logger
-        # builder.response :json, :content_type => "application/json"
       end
 
       req_info[:params_key].each do |key|
