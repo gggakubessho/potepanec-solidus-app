@@ -229,3 +229,39 @@ function FormSubmit() {
   	addEvent(window,"resize",footerFixed);
 
   }
+
+//============================== Suggests =========================
+
+$(function() {
+  const t = function(t, e) {
+      $.ajax({
+          type: "GET",
+          url: "/potepan/api/suggests",
+          data: {
+              keyword: t.term
+          },
+          dataType: "json",
+          cache: !0,
+          success: function(t) {
+              e(t)
+          },
+          error: function() {
+              e(["error"])
+          }
+      })
+  };
+  $(".get_suggest").autocomplete({
+      change: function() {
+          $(".dropdown").addClass("open")
+      },
+      source: t,
+      autoFocus: !0,
+      delay: 300,
+      minLength: 1
+  }),
+  $('.ui-front[id*="ui-id-"]').hover(function() {
+      $(".dropdown").addClass("open")
+  }, function() {
+      $(".dropdown").removeClass("open")
+  })
+});
