@@ -1,9 +1,8 @@
 class Potepan::Api::SuggestsController < ApplicationController
-  MAX_DISPLAY_COUNT = 4
   def index
     api_params = {}
     api_params[:keyword] = params[:keyword]
-    api_params[:max_num] = MAX_DISPLAY_COUNT
+    api_params[:max_num] = params[:max_num]
     con = Potepan::Request::SuggestsRequest.build(api_params)
     res = Potepan::APIRequest.send(con)
     status = res.status
