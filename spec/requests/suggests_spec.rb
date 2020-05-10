@@ -18,7 +18,7 @@ RSpec.describe "Suggests", type: :request do
             status: status,
             body: api_res_body
           )
-        get potepan_api_suggests_path, params: query
+        get potepan_suggests_path, params: query
       end
 
       it "レスポンスコード200を返すこと" do
@@ -39,7 +39,7 @@ RSpec.describe "Suggests", type: :request do
           to_return(
             status: status
           )
-        get potepan_api_suggests_path, params: query
+        get potepan_suggests_path, params: query
       end
 
       it "レスポンスコード400を返すこと" do
@@ -62,7 +62,7 @@ RSpec.describe "Suggests", type: :request do
           to_return(
             status: status
           )
-        get potepan_api_suggests_path, params: query
+        get potepan_suggests_path, params: query
       end
 
       it "レスポンスコード401を返すこと" do
@@ -85,7 +85,7 @@ RSpec.describe "Suggests", type: :request do
           to_return(
             status: status
           )
-        get potepan_api_suggests_path, params: query
+        get potepan_suggests_path, params: query
       end
 
       it "レスポンスコード404を返すこと" do
@@ -108,7 +108,7 @@ RSpec.describe "Suggests", type: :request do
           to_return(
             status: status
           )
-        get potepan_api_suggests_path, params: query
+        get potepan_suggests_path, params: query
       end
 
       it "レスポンスコード500を返すこと" do
