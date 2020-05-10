@@ -25,10 +25,8 @@ RSpec.describe "Suggests", type: :request do
         expect(response).to have_http_status status
       end
 
-      it "ステータスとapiの内容をレスポンスbodyとして返すこと" do
-        json = JSON.parse(response.body)
-        expect(json["status"]).to eq status
-        expect(json["message"]).to eq api_res_body
+      it "apiの内容をレスポンスbodyとして返すこと" do
+        expect(JSON.parse(response.body)).to eq api_res_body
       end
     end
 
