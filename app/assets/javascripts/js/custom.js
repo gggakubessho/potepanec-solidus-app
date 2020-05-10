@@ -233,20 +233,21 @@ function FormSubmit() {
 //============================== Suggests =========================
 
 $(function() {
-  const t = function(t, e) {
+  const src = function(request, response) {
       $.ajax({
           type: "GET",
           url: "/potepan/api/suggests",
           data: {
-              keyword: t.term
+              keyword: request.term,
+              max_num: 5
           },
           dataType: "json",
           cache: !0,
-          success: function(t) {
-              e(t)
+          success: function(data) {
+            response(data)
           },
-          error: function() {
-              e(["error"])
+          error: function(response) {
+            alert(JSON.stringify(response.responseJSON))
           }
       })
   };
@@ -254,7 +255,7 @@ $(function() {
       change: function() {
           $(".dropdown").addClass("open")
       },
-      source: t,
+      source: src,
       autoFocus: !0,
       delay: 300,
       minLength: 1
