@@ -236,7 +236,7 @@ $(function() {
   const src = function(request, response) {
     $.ajax({
       type: "GET",
-      url: "/potepan/api/suggests",
+      url: "/potepan/suggests",
       data: {
         keyword: request.term,
         max_num: 5
