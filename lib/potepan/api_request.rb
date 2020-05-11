@@ -16,7 +16,7 @@ module Potepan
       req_info[:params_key].each do |key|
         connection.params[key] = params.fetch(key, "")
       end
-      @connection  = connection
+      @connection = connection
       self
     end
 
