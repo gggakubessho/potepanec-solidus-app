@@ -3,8 +3,8 @@ class Potepan::Api::SuggestsController < ApplicationController
     api_params = {}
     api_params[:keyword] = params[:keyword]
     api_params[:max_num] = params[:max_num]
-    con = Potepan::Request::SuggestsRequest.build(api_params)
-    res = Potepan::APIRequest.send(con)
+    suggest_request = Potepan::Request::SuggestsRequest.build(api_params)
+    res = suggest_request.send
     status = res.status
     if status == 200
       render status: status, json: res.body

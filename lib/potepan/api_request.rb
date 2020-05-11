@@ -13,15 +13,15 @@ module Potepan
         builder.headers["Authorization"] = "Bearer #{api_key}"
         builder.response :logger
       end
-
       req_info[:params_key].each do |key|
         connection.params[key] = params.fetch(key, "")
       end
-      connection
+      @connection  = connection
+      self
     end
 
-    def self.send(con)
-      con.get
+    def self.send
+      @connection.get
     rescue => e
       raise e.message
     end
