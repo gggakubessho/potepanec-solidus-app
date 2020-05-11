@@ -242,7 +242,7 @@ $(function() {
         max_num: 5
       },
       dataType: "json",
-      cache: !0,
+      cache: true,
       success: function(data) {
         response(data)
       },
@@ -260,7 +260,7 @@ $(function() {
     autoFocus: !0,
     delay: 300,
     minLength: 1
-  }),
+  });
   $('.ui-front[id*="ui-id-"]').hover(function() {
     $(".dropdown").addClass("open")
   }, function() {
