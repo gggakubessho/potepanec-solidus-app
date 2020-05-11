@@ -9,18 +9,7 @@ class Potepan::Api::SuggestsController < ApplicationController
     if status == 200
       render status: status, json: res.body
     else
-      case status
-      when 400
-        render status: status, json: { status: status, message: "Bad Request" }
-      when 401
-        render status: status, json: { status: status, message: "Unauthorized" }
-      when 404
-        render status: status, json: { status: status, message: "Not Found" }
-      when 500..599
-        render status: 500, json: { status: status, message: "Internal Server Error" }
-      else
-        render status: status, json: { status: status, message: "Sever Error" }
-      end
+      api_error_handler(status)
     end
   end
 end
