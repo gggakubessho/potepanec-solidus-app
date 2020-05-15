@@ -197,5 +197,4 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-# ignore .env
 .env
