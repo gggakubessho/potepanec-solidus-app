@@ -11,6 +11,10 @@ RSpec.describe "Suggests", type: :request do
       query = { "keyword" => "r", "max_num" => 5 }
       status = 200
       api_res_body = ["ruby", "ruby for women", "ruby for men", "rails", "rails for women"]
+      subject do
+        get potepan_api_suggests_path, params: query
+        response
+      end
 
       before do
         stub_request(:get, url).with(headers: headers, query: query).
@@ -18,14 +22,10 @@ RSpec.describe "Suggests", type: :request do
             status: status,
             body: api_res_body
           )
-        get potepan_api_suggests_path, params: query
-      end
-
-      it "レスポンスコード200を返すこと" do
-        expect(response).to have_http_status status
       end
 
       it "apiの内容をレスポンスbodyとして返すこと" do
+        is_expected.to have_http_status(status)
         expect(JSON.parse(response.body)).to eq api_res_body
       end
     end
@@ -33,20 +33,20 @@ RSpec.describe "Suggests", type: :request do
     context "レスポンスコード400エラーの場合" do
       query = { "keyword" => "400", "max_num" => 5 }
       status = 400
+      subject do
+        get potepan_api_suggests_path, params: query
+        response
+      end
 
       before do
         stub_request(:get, url).with(headers: headers, query: query).
           to_return(
             status: status
           )
-        get potepan_api_suggests_path, params: query
-      end
-
-      it "レスポンスコード400を返すこと" do
-        expect(response).to have_http_status status
       end
 
       it "ステータス400とエラーメッセージをレスポンスbodyとして返すこと" do
+        is_expected.to have_http_status(status)
         json = JSON.parse(response.body)
         expect(json["status"]).to eq status
         expect(json["message"]).to eq "Bad Request"
@@ -56,20 +56,20 @@ RSpec.describe "Suggests", type: :request do
     context "レスポンスコード401エラーの場合" do
       query = { "keyword" => "401", "max_num" => 5 }
       status = 401
+      subject do
+        get potepan_api_suggests_path, params: query
+        response
+      end
 
       before do
         stub_request(:get, url).with(headers: headers, query: query).
           to_return(
             status: status
           )
-        get potepan_api_suggests_path, params: query
-      end
-
-      it "レスポンスコード401を返すこと" do
-        expect(response).to have_http_status status
       end
 
       it "ステータス401とエラーメッセージをレスポンスbodyとして返すこと" do
+        is_expected.to have_http_status(status)
         json = JSON.parse(response.body)
         expect(json["status"]).to eq status
         expect(json["message"]).to eq "Unauthorized"
@@ -79,20 +79,20 @@ RSpec.describe "Suggests", type: :request do
     context "レスポンスコード404エラーの場合" do
       query = { "keyword" => "404", "max_num" => 5 }
       status = 404
+      subject do
+        get potepan_api_suggests_path, params: query
+        response
+      end
 
       before do
         stub_request(:get, url).with(headers: headers, query: query).
           to_return(
             status: status
           )
-        get potepan_api_suggests_path, params: query
-      end
-
-      it "レスポンスコード404を返すこと" do
-        expect(response).to have_http_status status
       end
 
       it "ステータス404とエラーメッセージをレスポンスbodyとして返すこと" do
+        is_expected.to have_http_status(status)
         json = JSON.parse(response.body)
         expect(json["status"]).to eq status
         expect(json["message"]).to eq "Not Found"
@@ -102,20 +102,20 @@ RSpec.describe "Suggests", type: :request do
     context "レスポンスコード500エラーの場合" do
       query = { "keyword" => "", "max_num" => 5 }
       status = 500
+      subject do
+        get potepan_api_suggests_path, params: query
+        response
+      end
 
       before do
         stub_request(:get, url).with(headers: headers, query: query).
           to_return(
             status: status
           )
-        get potepan_api_suggests_path, params: query
-      end
-
-      it "レスポンスコード500を返すこと" do
-        expect(response).to have_http_status status
       end
 
       it "ステータス500とエラーメッセージをレスポンスbodyとして返すこと" do
+        is_expected.to have_http_status(status)
         json = JSON.parse(response.body)
         expect(json["status"]).to eq status
         expect(json["message"]).to eq "Internal Server Error"
