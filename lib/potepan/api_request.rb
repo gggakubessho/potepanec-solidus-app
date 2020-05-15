@@ -23,7 +23,8 @@ module Potepan
     def self.send
       @connection.get
     rescue => e
-      raise e.message
+      Rails.logger.error e
+      raise
     end
   end
 end
