@@ -2,6 +2,7 @@ class Potepan::Api::SuggestsController < ApplicationController
   TOKEN = ENV["SUGGESTS_API_KEY"]
   before_action :authenticate
   def index
+
   end
 
   def authenticate
@@ -17,5 +18,4 @@ class Potepan::Api::SuggestsController < ApplicationController
   def render_unauthorized
     render json: "unauthorized", status: :unauthorized
   end
-
 end
