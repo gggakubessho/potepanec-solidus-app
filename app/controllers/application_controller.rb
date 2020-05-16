@@ -18,4 +18,14 @@ class ApplicationController < ActionController::Base
       render status: status, json: { status: status, message: "Sever Error" }
     end
   end
+
+  def authenticate
+    authenticate_token || api_error_handler(401)
+  end
+
+  def authenticate_token
+    authenticate_with_http_token do |token, options|
+      token == ENV["SUGGESTS_API_KEY"]
+    end
+  end
 end
