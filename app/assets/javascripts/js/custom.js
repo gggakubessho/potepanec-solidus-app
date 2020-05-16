@@ -261,6 +261,7 @@ $(function() {
     delay: 300,
     minLength: 1
   });
+  
   $('.ui-front[id*="ui-id-"]').hover(function() {
     $(".dropdown").addClass("open")
   }, function() {
