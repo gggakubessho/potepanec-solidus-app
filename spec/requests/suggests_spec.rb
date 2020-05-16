@@ -5,7 +5,7 @@ RSpec.describe "Suggests", type: :request do
     api_key = ENV["POTEPAN_API_KEY"]
     req_info = Potepan::Request::SuggestsRequest.opts
     subject do
-      get potepan_api_suggests_path, params: query
+      get potepan_suggests_path, params: query
       response
     end
 
