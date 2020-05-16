@@ -1,21 +1,22 @@
 class Potepan::Api::SuggestsController < ApplicationController
-  TOKEN = ENV["SUGGESTS_API_KEY"]
   before_action :authenticate
   def index
-
-  end
-
-  def authenticate
-    authenticate_token || render_unauthorized
-  end
-
-  def authenticate_token
-    authenticate_with_http_token do |token, options|
-      token == TOKEN
+    if params[:keyword]
+      @products = search_product(params[:keyword], params[:max_num])
+      render json: @products
+    else
+      api_error_handler(500)
     end
   end
 
-  def render_unauthorized
-    render json: "unauthorized", status: :unauthorized
+  private
+
+  def search_product(keyword, max_num)
+    return [] if keyword.blank?
+    @product = Potepan::PotepanSuggest.select(:keyword).where(['keyword like ?', "#{keyword}%"])
+    if max_num.present?
+      @product = @product.limit(max_num)
+    end
+    @product.pluck(:keyword).to_json
   end
 end
