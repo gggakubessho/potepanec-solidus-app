@@ -4,6 +4,11 @@ RSpec.describe "Suggests", type: :request do
   describe "GET #index" do
     api_key = ENV["POTEPAN_API_KEY"]
     req_info = Potepan::Request::SuggestsRequest.opts
+    subject do
+      get potepan_api_suggests_path, params: query
+      response
+    end
+
     let(:url) { ENV["POTEPAN_API_URI"] + req_info[:path] }
     let(:headers) { { Authorization: "Bearer #{api_key}" } }
     let(:base_stub) do
@@ -15,18 +20,11 @@ RSpec.describe "Suggests", type: :request do
     end
 
     context "レスポンスコード200OKの場合" do
-      subject do
-        get potepan_suggests_path, params: query
-        response
-      end
-
       let(:query) { { keyword: "r", max_num: 5 } }
       let(:status) { 200 }
       let(:api_res_body) { ["ruby", "ruby for women", "ruby for men", "rails", "rails for women"] }
 
-      before do
-        base_stub
-      end
+      before { base_stub }
 
       it "apiの内容をレスポンスbodyとして返すこと" do
         is_expected.to have_http_status(status)
@@ -35,18 +33,11 @@ RSpec.describe "Suggests", type: :request do
     end
 
     context "レスポンスコード400エラーの場合" do
-      subject do
-        get potepan_suggests_path, params: query
-        response
-      end
-
       let(:query) { { keyword: "400", max_num: 5 } }
       let(:status) { 400 }
       let(:api_res_body) { ["ruby", "ruby for women", "ruby for men", "rails", "rails for women"] }
 
-      before do
-        base_stub
-      end
+      before { base_stub }
 
       it "ステータス400とエラーメッセージをレスポンスbodyとして返すこと" do
         is_expected.to have_http_status(status)
@@ -57,18 +48,11 @@ RSpec.describe "Suggests", type: :request do
     end
 
     context "レスポンスコード401エラーの場合" do
-      subject do
-        get potepan_suggests_path, params: query
-        response
-      end
-
       let(:query) { { keyword: "401", max_num: 5 } }
       let(:status) { 401 }
       let(:api_res_body) { "unauthorized" }
 
-      before do
-        base_stub
-      end
+      before { base_stub }
 
       it "ステータス401とエラーメッセージをレスポンスbodyとして返すこと" do
         is_expected.to have_http_status(status)
@@ -79,18 +63,11 @@ RSpec.describe "Suggests", type: :request do
     end
 
     context "レスポンスコード404エラーの場合" do
-      subject do
-        get potepan_suggests_path, params: query
-        response
-      end
-
       let(:query) { { keyword: "404", max_num: 5 } }
       let(:status) { 404 }
       let(:api_res_body) { "Not Found" }
 
-      before do
-        base_stub
-      end
+      before { base_stub }
 
       it "ステータス404とエラーメッセージをレスポンスbodyとして返すこと" do
         is_expected.to have_http_status(status)
@@ -101,18 +78,11 @@ RSpec.describe "Suggests", type: :request do
     end
 
     context "レスポンスコード500エラーの場合" do
-      subject do
-        get potepan_suggests_path, params: query
-        response
-      end
-
-      let(:query) { { "keyword" => "", "max_num" => 5 } }
+      let(:query) { { keyword: "500", "max_num" => 5 } }
       let(:status) { 500 }
       let(:api_res_body) { "unexpected error" }
 
-      before do
-        base_stub
-      end
+      before { base_stub }
 
       it "ステータス500とエラーメッセージをレスポンスbodyとして返すこと" do
         is_expected.to have_http_status(status)
