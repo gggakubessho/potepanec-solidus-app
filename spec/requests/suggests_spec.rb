@@ -12,7 +12,7 @@ RSpec.describe "Suggests", type: :request do
       status = 200
       api_res_body = ["ruby", "ruby for women", "ruby for men", "rails", "rails for women"]
       subject do
-        get potepan_api_suggests_path, params: query
+        get potepan_suggests_path, params: query
         response
       end
 
@@ -34,7 +34,7 @@ RSpec.describe "Suggests", type: :request do
       query = { "keyword" => "400", "max_num" => 5 }
       status = 400
       subject do
-        get potepan_api_suggests_path, params: query
+        get potepan_suggests_path, params: query
         response
       end
 
@@ -57,7 +57,7 @@ RSpec.describe "Suggests", type: :request do
       query = { "keyword" => "401", "max_num" => 5 }
       status = 401
       subject do
-        get potepan_api_suggests_path, params: query
+        get potepan_suggests_path, params: query
         response
       end
 
@@ -80,7 +80,7 @@ RSpec.describe "Suggests", type: :request do
       query = { "keyword" => "404", "max_num" => 5 }
       status = 404
       subject do
-        get potepan_api_suggests_path, params: query
+        get potepan_suggests_path, params: query
         response
       end
 
@@ -103,7 +103,7 @@ RSpec.describe "Suggests", type: :request do
       query = { "keyword" => "", "max_num" => 5 }
       status = 500
       subject do
-        get potepan_api_suggests_path, params: query
+        get potepan_suggests_path, params: query
         response
       end
 
