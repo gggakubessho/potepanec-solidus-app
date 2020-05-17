@@ -19,13 +19,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def authenticate
-    authenticate_token || api_error_handler(401)
+  def authenticate(api_key)
+    authenticate_token(api_key) || api_error_handler(401)
   end
 
-  def authenticate_token
+  def authenticate_token(api_key)
     authenticate_with_http_token do |token, options|
-      token == ENV["SUGGESTS_API_KEY"]
+      token == ENV[api_key]
     end
   end
 end

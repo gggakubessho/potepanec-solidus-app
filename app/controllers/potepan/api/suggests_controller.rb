@@ -1,5 +1,5 @@
 class Potepan::Api::SuggestsController < ApplicationController
-  before_action :authenticate
+  before_action -> { authenticate("SUGGESTS_API_KEY") }
   def index
     if params[:keyword]
       @products = search_product(params[:keyword], params[:max_num])
