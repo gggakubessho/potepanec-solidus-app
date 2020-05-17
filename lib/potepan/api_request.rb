@@ -8,15 +8,14 @@ module Potepan
       req_info = opts
       url = ENV["POTEPAN_API_URI"] + req_info[:path]
       api_key = ENV["POTEPAN_API_KEY"]
-      connection = Faraday.new(url) do |builder|
+      @connection = Faraday.new(url) do |builder|
         builder.request :url_encoded
         builder.headers["Authorization"] = "Bearer #{api_key}"
         builder.response :logger
       end
       req_info[:params_key].each do |key|
-        connection.params[key] = params.fetch(key, "")
+        @connection.params[key] = params.fetch(key, "")
       end
-      @connection = connection
       self
     end
 
@@ -24,7 +23,7 @@ module Potepan
       @connection.get
     rescue => e
       Rails.logger.error e
-      raise
+      raise e
     end
   end
 end

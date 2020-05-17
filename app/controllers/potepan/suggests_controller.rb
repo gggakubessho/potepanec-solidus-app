@@ -1,7 +1,11 @@
 class Potepan::SuggestsController < ApplicationController
   def index
     suggest_request = Potepan::Request::SuggestsRequest.build(suggest_params)
-    res = suggest_request.send
+    begin
+      res = suggest_request.send
+    rescue => e
+      render status: 500, json: { status: 500, message: e }
+    end
     status = res.status
     if status == 200
       render status: status, json: res.body
