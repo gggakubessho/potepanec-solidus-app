@@ -58,5 +58,7 @@ module Potepanec
                          request_specs:  false
     end
 
+    config.paths.add 'lib', eager_load: true
+
   end
 end
