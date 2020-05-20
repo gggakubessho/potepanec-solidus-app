@@ -13,7 +13,9 @@ class Potepan::Api::SuggestsController < ApplicationController
 
   def search_keyword(keyword, max_num)
     return [] if keyword.blank?
-    limit = true if max_num.present? && max_num.to_i > 1
+    if max_num.present? && max_num.to_i > 1
+      limit = true
+    end
     keywords = Potepan::PotepanSuggest.select(:keyword).where(['keyword like ?', "#{keyword}%"])
     keywords = keywords.limit(max_num) if limit
     keywords.pluck(:keyword).to_json
