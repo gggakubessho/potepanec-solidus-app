@@ -99,8 +99,50 @@ RSpec.describe "Suggests", type: :request do
       end
     end
 
-    context "正常系(max_numが数値以外)の場合" do
+    context "正常系(max_numが文字列)の場合" do
       let(:query) { { keyword: "ruby", max_num: "てすと" } }
+      let(:status) { 200 }
+      let(:headers) { { Authorization: "Bearer #{api_key}" } }
+
+      it "keywordに前方一致した商品名だけを返すこと" do
+        is_expected.to have_http_status(status)
+        res = JSON.parse(response.body)
+        suggest_keywords.each do |suggest_keyword|
+          expect(res).to include suggest_keyword.keyword
+        end
+        expect(res).not_to include unmatch_keyword
+      end
+
+      it "keywordマッチした全データを返すこと" do
+        is_expected.to have_http_status(status)
+        expect(JSON.parse(response.body).size).to eq Potepan::PotepanSuggest.
+          where(['keyword like ?', "#{query[:keyword]}%"]).count
+      end
+    end
+
+    context "正常系(max_numが-1)の場合" do
+      let(:query) { { keyword: "ruby", max_num: -1 } }
+      let(:status) { 200 }
+      let(:headers) { { Authorization: "Bearer #{api_key}" } }
+
+      it "keywordに前方一致した商品名だけを返すこと" do
+        is_expected.to have_http_status(status)
+        res = JSON.parse(response.body)
+        suggest_keywords.each do |suggest_keyword|
+          expect(res).to include suggest_keyword.keyword
+        end
+        expect(res).not_to include unmatch_keyword
+      end
+
+      it "keywordマッチした全データを返すこと" do
+        is_expected.to have_http_status(status)
+        expect(JSON.parse(response.body).size).to eq Potepan::PotepanSuggest.
+          where(['keyword like ?', "#{query[:keyword]}%"]).count
+      end
+    end
+
+    context "正常系(max_numが0)の場合" do
+      let(:query) { { keyword: "ruby", max_num: 0 } }
       let(:status) { 200 }
       let(:headers) { { Authorization: "Bearer #{api_key}" } }
 
