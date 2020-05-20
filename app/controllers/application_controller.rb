@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_token(api_key)
     authenticate_with_http_token do |token, options|
-      token == ENV[api_key]
+      Rack::Utils.secure_compare(token, ENV[api_key])
     end
   end
 end
