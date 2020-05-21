@@ -2,8 +2,8 @@ class Potepan::Api::SuggestsController < ApplicationController
   before_action -> { authenticate("SUGGESTS_API_KEY") }
   def index
     if params[:keyword]
-      @products = search_keyword(params[:keyword], params[:max_num])
-      render json: @products
+      keywords = search_keyword(params[:keyword], params[:max_num])
+      render json: keywords
     else
       api_error_handler(500)
     end
