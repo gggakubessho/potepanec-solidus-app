@@ -15,11 +15,11 @@ RSpec.describe "Suggests", type: :request do
     end
     let!(:unmatch_keyword) { "Rails ruby" }
     let(:parsed_body) { JSON.parse(response.body) }
+    let(:status) { 200 }
+    let(:headers) { { Authorization: "Bearer #{api_key}" } }
 
     context "正常系(keywordマッチ有り&max_num有り)の場合" do
       let(:query) { { keyword: "ruby", max_num: 5 } }
-      let(:status) { 200 }
-      let(:headers) { { Authorization: "Bearer #{api_key}" } }
 
       it "keywordに前方一致した商品名だけを返すこと" do
         is_expected.to have_http_status(status)
@@ -37,8 +37,7 @@ RSpec.describe "Suggests", type: :request do
 
     context "正常系(keywordマッチなし)の場合" do
       let(:query) { { keyword: "test", max_num: 5 } }
-      let(:status) { 200 }
-      let(:headers) { { Authorization: "Bearer #{api_key}" } }
+      
 
       it "空の配列を返すこと" do
         is_expected.to have_http_status(status)
@@ -48,8 +47,6 @@ RSpec.describe "Suggests", type: :request do
 
     context "正常系(keyword空)の場合" do
       let(:query) { { keyword: "", max_num: 5 } }
-      let(:status) { 200 }
-      let(:headers) { { Authorization: "Bearer #{api_key}" } }
 
       it "空の配列を返すこと" do
         is_expected.to have_http_status(status)
@@ -59,8 +56,6 @@ RSpec.describe "Suggests", type: :request do
 
     context "正常系(max_num存在なし)の場合" do
       let(:query) { { keyword: "ruby" } }
-      let(:status) { 200 }
-      let(:headers) { { Authorization: "Bearer #{api_key}" } }
 
       it "keywordに前方一致した商品名だけを返すこと" do
         is_expected.to have_http_status(status)
@@ -79,8 +74,6 @@ RSpec.describe "Suggests", type: :request do
 
     context "正常系(max_num空)の場合" do
       let(:query) { { keyword: "ruby", max_num: "" } }
-      let(:status) { 200 }
-      let(:headers) { { Authorization: "Bearer #{api_key}" } }
 
       it "keywordに前方一致した商品名だけを返すこと" do
         is_expected.to have_http_status(status)
@@ -99,8 +92,6 @@ RSpec.describe "Suggests", type: :request do
 
     context "正常系(max_numが文字列)の場合" do
       let(:query) { { keyword: "ruby", max_num: "てすと" } }
-      let(:status) { 200 }
-      let(:headers) { { Authorization: "Bearer #{api_key}" } }
 
       it "keywordに前方一致した商品名だけを返すこと" do
         is_expected.to have_http_status(status)
@@ -119,8 +110,6 @@ RSpec.describe "Suggests", type: :request do
 
     context "正常系(max_numが-1)の場合" do
       let(:query) { { keyword: "ruby", max_num: -1 } }
-      let(:status) { 200 }
-      let(:headers) { { Authorization: "Bearer #{api_key}" } }
 
       it "keywordに前方一致した商品名だけを返すこと" do
         is_expected.to have_http_status(status)
@@ -139,8 +128,6 @@ RSpec.describe "Suggests", type: :request do
 
     context "正常系(max_numが0)の場合" do
       let(:query) { { keyword: "ruby", max_num: 0 } }
-      let(:status) { 200 }
-      let(:headers) { { Authorization: "Bearer #{api_key}" } }
 
       it "keywordに前方一致した商品名だけを返すこと" do
         is_expected.to have_http_status(status)
@@ -160,7 +147,6 @@ RSpec.describe "Suggests", type: :request do
     context "異常系(keyword存在なし)の場合" do
       let(:query) { { max_num: 5 } }
       let(:status) { 500 }
-      let(:headers) { { Authorization: "Bearer #{api_key}" } }
 
       it "ステータス500とエラーメッセージをレスポンスbodyとして返すこと" do
         is_expected.to have_http_status(status)
