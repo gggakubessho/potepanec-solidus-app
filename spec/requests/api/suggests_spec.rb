@@ -37,7 +37,6 @@ RSpec.describe "Suggests", type: :request do
 
     context "正常系(keywordマッチなし)の場合" do
       let(:query) { { keyword: "test", max_num: 5 } }
-      
 
       it "空の配列を返すこと" do
         is_expected.to have_http_status(status)
