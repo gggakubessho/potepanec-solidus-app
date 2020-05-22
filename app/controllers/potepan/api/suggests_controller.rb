@@ -18,6 +18,6 @@ class Potepan::Api::SuggestsController < ApplicationController
     max_num = max_num.to_i.positive? ? max_num : LIMIT_MAX_NUM
     keywords = Potepan::PotepanSuggest.where(['keyword like ?', "#{keyword}%"])
     keywords = keywords.limit(max_num)
-    keywords.pluck(:keyword).to_json
+    keywords.pluck(:keyword)
   end
 end
