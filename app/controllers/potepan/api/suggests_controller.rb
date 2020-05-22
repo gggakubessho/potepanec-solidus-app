@@ -7,7 +7,7 @@ class Potepan::Api::SuggestsController < ApplicationController
       keywords = search_keyword(params[:keyword], params[:max_num])
       render json: keywords
     else
-      api_error_handler(500)
+      api_error_handler(500, err_msg: "keyword parameters are required.")
     end
   end
 

@@ -3,19 +3,23 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def api_error_handler(status)
+  def api_error_handler(status, err_msg: "")
     case status
     when 400
-      render status: :bad_request, json: { status: status, message: "Bad Request" }
+      err_msg = err_msg.blank? ? "Bad Request" : err_msg
+      render status: :bad_request, json: { status: status, message: err_msg }
     when 401
-      render status: :unauthorized, json: { status: status, message: "Unauthorized" }
+      err_msg = err_msg.blank? ? "Unauthorized" : err_msg
+      render status: :unauthorized, json: { status: status, message: err_msg }
     when 404
-      render status: :not_found, json: { status: status, message: "Not Found" }
+      err_msg = err_msg.blank? ? "Not Found" : err_msg
+      render status: :not_found, json: { status: status, message: err_msg }
     when 500..599
+      err_msg = err_msg.blank? ? "Internal Server Error" : err_msg
       render status: :internal_server_error,
-             json: { status: status, message: "Internal Server Error" }
+             json: { status: status, message: err_msg }
     else
-      render status: status, json: { status: status, message: "Sever Error" }
+      render status: status, json: { status: status, message: err_msg }
     end
   end
 

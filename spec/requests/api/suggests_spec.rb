@@ -148,7 +148,7 @@ RSpec.describe "Suggests", type: :request do
       it "ステータス500とエラーメッセージをレスポンスbodyとして返すこと" do
         is_expected.to have_http_status(status)
         expect(parsed_body["status"]).to eq status
-        expect(parsed_body["message"]).to eq "Internal Server Error"
+        expect(parsed_body["message"]).to eq "keyword parameters are required."
       end
     end
 
