@@ -4,34 +4,32 @@ RSpec.describe "Suggests", type: :request do
   describe "GET #index" do
     api_key = ENV["SUGGESTS_API_KEY"]
 
-    subject do
-      get potepan_api_suggests_path, params: query, headers: headers
-      response
-    end
+    subject { response }
 
     let!(:suggest_keywords) do
-      create(:potepan_suggest, keyword: "Rails ruby")
       create_list(:potepan_suggest, 5)
     end
     let!(:unmatch_keyword) { "Rails ruby" }
     let(:parsed_body) { JSON.parse(response.body) }
+    let(:query) { { keyword: "ruby", max_num: 5 } }
     let(:status) { 200 }
     let(:headers) { { Authorization: "Bearer #{api_key}" } }
 
-    context "正常系(keywordマッチ有り&max_num有り)の場合" do
-      let(:query) { { keyword: "ruby", max_num: 5 } }
+    before { get potepan_api_suggests_path, params: query, headers: headers }
 
+    context "正常系(keywordマッチ有り&max_num有り)の場合" do
       it "keywordに前方一致した商品名だけを返すこと" do
         is_expected.to have_http_status(status)
-        suggest_keywords.each do |suggest_keyword|
-          expect(parsed_body).to include suggest_keyword.keyword
+        suggest_keywords.each_with_index do |suggest_keyword, i|
+          expect(parsed_body[i]).to eq suggest_keyword.keyword
         end
         expect(parsed_body).not_to include unmatch_keyword
       end
 
-      it "max_numの数だけ返すこと" do
+      it "keywordマッチした数を最大max_numだけ返すこと" do
         is_expected.to have_http_status(status)
-        expect(parsed_body.size).to eq query[:max_num]
+        expect(parsed_body.size).to eq Potepan::PotepanSuggest.
+          where(['keyword like ?', "#{query[:keyword]}%"]).limit(query[:max_num]).count
       end
     end
 
@@ -58,8 +56,8 @@ RSpec.describe "Suggests", type: :request do
 
       it "keywordに前方一致した商品名だけを返すこと" do
         is_expected.to have_http_status(status)
-        suggest_keywords.each do |suggest_keyword|
-          expect(parsed_body).to include suggest_keyword.keyword
+        suggest_keywords.each_with_index do |suggest_keyword, i|
+          expect(parsed_body[i]).to eq suggest_keyword.keyword
         end
         expect(parsed_body).not_to include unmatch_keyword
       end
@@ -76,8 +74,8 @@ RSpec.describe "Suggests", type: :request do
 
       it "keywordに前方一致した商品名だけを返すこと" do
         is_expected.to have_http_status(status)
-        suggest_keywords.each do |suggest_keyword|
-          expect(parsed_body).to include suggest_keyword.keyword
+        suggest_keywords.each_with_index do |suggest_keyword, i|
+          expect(parsed_body[i]).to eq suggest_keyword.keyword
         end
         expect(parsed_body).not_to include unmatch_keyword
       end
@@ -94,8 +92,8 @@ RSpec.describe "Suggests", type: :request do
 
       it "keywordに前方一致した商品名だけを返すこと" do
         is_expected.to have_http_status(status)
-        suggest_keywords.each do |suggest_keyword|
-          expect(parsed_body).to include suggest_keyword.keyword
+        suggest_keywords.each_with_index do |suggest_keyword, i|
+          expect(parsed_body[i]).to eq suggest_keyword.keyword
         end
         expect(parsed_body).not_to include unmatch_keyword
       end
@@ -112,8 +110,8 @@ RSpec.describe "Suggests", type: :request do
 
       it "keywordに前方一致した商品名だけを返すこと" do
         is_expected.to have_http_status(status)
-        suggest_keywords.each do |suggest_keyword|
-          expect(parsed_body).to include suggest_keyword.keyword
+        suggest_keywords.each_with_index do |suggest_keyword, i|
+          expect(parsed_body[i]).to eq suggest_keyword.keyword
         end
         expect(parsed_body).not_to include unmatch_keyword
       end
@@ -130,8 +128,8 @@ RSpec.describe "Suggests", type: :request do
 
       it "keywordに前方一致した商品名だけを返すこと" do
         is_expected.to have_http_status(status)
-        suggest_keywords.each do |suggest_keyword|
-          expect(parsed_body).to include suggest_keyword.keyword
+        suggest_keywords.each_with_index do |suggest_keyword, i|
+          expect(parsed_body[i]).to eq suggest_keyword.keyword
         end
         expect(parsed_body).not_to include unmatch_keyword
       end
