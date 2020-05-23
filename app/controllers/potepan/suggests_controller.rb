@@ -10,7 +10,7 @@ class Potepan::SuggestsController < ApplicationController
         api_error_handler(status)
       end
     rescue
-      render status: 500, json: { status: 500, message: "request connection failed." }
+      api_error_handler(500, err_msg: "request connection failed.")
     end
   end
 
