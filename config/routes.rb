@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     
     resources :products,            only: [:show]
     resources :categories,          only: [:show]
+    resources :suggests,            only: [:index]
 
     namespace :api do
       resources :suggests,          only: [:index]

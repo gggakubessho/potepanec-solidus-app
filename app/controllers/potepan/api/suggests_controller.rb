@@ -1,22 +1,23 @@
 class Potepan::Api::SuggestsController < ApplicationController
+  before_action -> { authenticate("SUGGESTS_API_KEY") }
+  LIMIT_MAX_NUM = 20
+
   def index
-    suggest_request = Potepan::Request::SuggestsRequest.build(suggest_params)
-    begin
-      res = suggest_request.send
-    rescue => e
-      render status: 500, json: { status: 500, message: e }
-    end
-    status = res.status
-    if status == 200
-      render status: status, json: res.body
+    if params[:keyword]
+      keywords = search_keyword(params[:keyword], params[:max_num])
+      render json: keywords
     else
-      api_error_handler(status)
+      api_error_handler(500, err_msg: "keyword parameters are required.")
     end
   end
 
   private
 
-  def suggest_params
-    params.permit(:keyword, :max_num)
+  def search_keyword(keyword, max_num)
+    return [] if keyword.blank?
+    max_num = max_num.to_i.positive? ? max_num : LIMIT_MAX_NUM
+    keywords = Potepan::PotepanSuggest.where(['keyword like ?', "#{keyword}%"])
+    keywords = keywords.limit(max_num)
+    keywords.pluck(:keyword)
   end
 end
