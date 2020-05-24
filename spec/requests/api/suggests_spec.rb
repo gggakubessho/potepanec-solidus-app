@@ -29,8 +29,7 @@ RSpec.describe "Suggests", type: :request do
 
       it "keywordマッチした数を最大max_numだけ返すこと" do
         is_expected.to have_http_status(status)
-        expect(parsed_body.size).to eq Potepan::PotepanSuggest.
-          where(['keyword like ?', "#{query[:keyword]}%"]).limit(query[:max_num]).count
+        expect(parsed_body.size).to eq 5
       end
     end
 
@@ -66,8 +65,7 @@ RSpec.describe "Suggests", type: :request do
 
       it "keywordマッチした全データを返すこと" do
         is_expected.to have_http_status(status)
-        expect(parsed_body.size).to eq Potepan::PotepanSuggest.
-          where(['keyword like ?', "#{query[:keyword]}%"]).count
+        expect(parsed_body.size).to eq 10
       end
     end
 
@@ -85,8 +83,7 @@ RSpec.describe "Suggests", type: :request do
 
       it "keywordマッチした全データを返すこと" do
         is_expected.to have_http_status(status)
-        expect(parsed_body.size).to eq Potepan::PotepanSuggest.
-          where(['keyword like ?', "#{query[:keyword]}%"]).count
+        expect(parsed_body.size).to eq 10
       end
     end
 
@@ -104,8 +101,7 @@ RSpec.describe "Suggests", type: :request do
 
       it "keywordマッチした全データを返すこと" do
         is_expected.to have_http_status(status)
-        expect(parsed_body.size).to eq Potepan::PotepanSuggest.
-          where(['keyword like ?', "#{query[:keyword]}%"]).count
+        expect(parsed_body.size).to eq 10
       end
     end
 
@@ -123,8 +119,7 @@ RSpec.describe "Suggests", type: :request do
 
       it "keywordマッチした全データを返すこと" do
         is_expected.to have_http_status(status)
-        expect(parsed_body.size).to eq Potepan::PotepanSuggest.
-          where(['keyword like ?', "#{query[:keyword]}%"]).count
+        expect(parsed_body.size).to eq 10
       end
     end
 
@@ -142,8 +137,7 @@ RSpec.describe "Suggests", type: :request do
 
       it "keywordマッチした全データを返すこと" do
         is_expected.to have_http_status(status)
-        expect(parsed_body.size).to eq Potepan::PotepanSuggest.
-          where(['keyword like ?', "#{query[:keyword]}%"]).count
+        expect(parsed_body.size).to eq 10
       end
     end
 
