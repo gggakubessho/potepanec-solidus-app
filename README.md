@@ -56,17 +56,10 @@ curl -H 'Authorization: Bearer {api_key}' 'https://potepanec-20200525232431.hero
 - RSpec
 - RuboCop
 - AWS S3
-
-画像管理
-
+  画像管理
 - docker
-
-開発環境構築
+  開発環境構築
 - heroku
-
-本番環境デプロイ
-
+  本番環境デプロイ
 - CircleCI
-
-RSpec,RuboCop,デプロイの自動実行
-
+  RSpec,RuboCop,デプロイの自動実行
