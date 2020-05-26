@@ -20,8 +20,10 @@ OSSのECサイトパッケージであるSolidusを用いたECサイト
 
 - サジェスト機能用API
 
-curl -H 'Authorization: Bearer {api_key}' 'https://potepanec-20200525232431.herokuapp.com/potepan/api/suggests?keyword=ruby&max_num=5'
+  ```
+  curl -H 'Authorization: Bearer {api_key}' 'https://potepanec-20200525232431.herokuapp.com/potepan/api/suggests?keyword=ruby&max_num=5'
 
+  ```
 
 # 機能詳細
 
@@ -50,16 +52,29 @@ curl -H 'Authorization: Bearer {api_key}' 'https://potepanec-20200525232431.hero
   ・エラーハンドリング
 
 # 使用技術
+
 - ruby 2.5.1
+
 - Ruby on Rails 5.2.1
+
 - mysql 8.0
+
 - RSpec
+
 - RuboCop
+
 - AWS S3
+
   画像管理
+
 - docker
+
   開発環境構築
+
 - heroku
+  
   本番環境デプロイ
+
 - CircleCI
+
   RSpec,RuboCop,デプロイの自動実行
