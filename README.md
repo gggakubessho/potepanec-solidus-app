@@ -8,15 +8,15 @@ OSSのECサイトパッケージであるSolidusを用いたECサイト
 # 実装機能
 - トップページ
 
-https://potepanec-20200525232431.herokuapp.com/potepan
+  https://potepanec-20200525232431.herokuapp.com/potepan
 
 - 商品詳細ページ
 
-https://potepanec-20200525232431.herokuapp.com/potepan
+  https://potepanec-20200525232431.herokuapp.com/potepan
 
 - 商品カテゴリページ
 
-https://potepanec-20200525232431.herokuapp.com/potepan/products/1
+  https://potepanec-20200525232431.herokuapp.com/potepan/products/1
 
 - サジェスト機能用API
 
@@ -27,27 +27,27 @@ curl -H 'Authorization: Bearer {api_key}' 'https://potepanec-20200525232431.hero
 
 - トップページ
 
-・ヘッダー、フッター、タイトルの実装
+  ・ヘッダー、フッター、タイトルの実装
 
 - 商品詳細ページ
 
-・商品詳細の表示
+  ・商品詳細の表示
 
-・関連商品の表示
+  ・関連商品の表示
 
 - 商品カテゴリページ
 
-・サイドメニューカテゴリ一覧の表示
+  ・サイドメニューカテゴリ一覧の表示
 
-・特定カテゴリの商品一覧の表示
+  ・特定カテゴリの商品一覧の表示
 
 - サジェスト機能用API
 
-・認証機能
+  ・認証機能
 
-・keywordパラメータにマッチしたデータを返却
+  ・keywordパラメータにマッチしたデータを返却
 
-・エラーハンドリング
+  ・エラーハンドリング
 
 # 使用技術
 - ruby 2.5.1
